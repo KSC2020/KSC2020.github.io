@@ -22,6 +22,8 @@
 
 		<!-- Google Charts -->
 		<script type="text/javascript">
+			var clientID = '138372310610-70u7gmjh5gjn4md61mgpmttlni36emge.apps.googleusercontent.com';
+			var scopes   = 'https://www.googleapis.com/auth/spreadsheets';
                         function initGoogleAuth(){
 				gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true}, handleAuthResult);
 			}
@@ -68,8 +70,6 @@
                         	// Get data
 				var qString = encodeURIComponent('SELECT Country, COUNT(Name) GROUP BY Country')
 				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
-				var clientID = '138372310610-70u7gmjh5gjn4md61mgpmttlni36emge.apps.googleusercontent.com';
-				var scopes   = 'https://www.googleapis.com/auth/spreadsheets';
 
 				query.send(handleQueryResponse)
 			}
