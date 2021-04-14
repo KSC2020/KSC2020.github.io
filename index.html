@@ -21,6 +21,40 @@
 		<link href="/static/css/style.css" rel="stylesheet">
 
 		<!-- Google Charts -->
+		<script type="text/javascript">
+                        function initGoogleAuth(){
+				gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true}, handleAuthResult);
+			}
+                        function handleAuthResult(authResult){
+				var authorizeButton = document.getElementById('authorize-button');
+				if(authResult && !authResult.error){
+					authorizeButton.style.visibility = 'hidden';
+					makeApiCall();
+				}else{
+					authorizeButton.style.visibility = '';
+					authorizeButton.onClick = handleAuthClick;
+				}
+			}
+                        function handleAuthClick(e){
+				gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: false}, handleAuthResult);
+				return false;
+			}
+                        function makeApiCall(){
+				// Note: The below spreadsheet is "Public on the web" and will work
+				// with or without an OAuth token.  For a better test, replace this
+				// URL with a private spreadsheet.
+				var tqUrl = 'https://docs.google.com/spreadsheets' +
+					    '/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq' +
+					    '?tqx=responseHandler:handleTqResponse' +
+					    '&access_token=' + encodeURIComponent(gapi.auth.getToken().access_token);
+				document.write("<script src=\"" + tqUrl +"\" type=\"text/javascript\"><\/script>");
+			}
+			function handleTqResponse(resp) {
+			        document.write(JSON.stringify(resp));
+			}
+		</script>
+		<script src="https://apis.google.com/js/auth.js?onload=initGoogleAuth"></script>
+
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
 			// Load the Visualization API and the corechart package.
@@ -31,7 +65,17 @@
 
                         // Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
                         function drawGeoChart() {
+                        	// Get data
+				var qString = encodeURIComponent('SELECT Country, COUNT(Name) GROUP BY Country')
+				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
+				var clientID = '138372310610-70u7gmjh5gjn4md61mgpmttlni36emge.apps.googleusercontent.com';
+				var scopes   = 'https://www.googleapis.com/auth/spreadsheets';
+
+				query.send(handleQueryResponse)
+			}
+                        function handleQueryResponse(response){
                         	// Create the data table.
+				/*
                         	var data = new google.visualization.DataTable();
                         	data.addColumn('string', 'City');
                         	data.addColumn('number', 'Members');
@@ -49,20 +93,17 @@
 					['Jammu',         3000],
 					['Bangalore',     2500],
 					['Melbourne',     550],
-					*/
+					*//*
                         	]);
+                                */
+	                        if(response.isError()){
+					alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+					return;
+				}
+                                var data = response.getDataTable();
                         
                         	// Set chart options
 				var options = {}
-				/*
-					//region: 'IT',
-					displayMode: 'markers',
-					//colorAxis: { colors: ['green', 'red']}
-				}
-				*/
-				//'title':'How Much Pizza I Ate Last Night',
-                        		//'width':400,
-                        		//'height':300};
                         
                         	// Instantiate and draw our chart, passing in some options.
                         	var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
@@ -73,6 +114,7 @@
 
 	<body>
 		<!-- NEW SETUP -->
+		<button id="authorize-button" style="visibility: hidden">Authorize</button>
 		<section id="frontdeck">
 			<div class="frontdeck-container">
 				<h1> Welcome to Koshur Scientific Connect </h1>
@@ -115,8 +157,8 @@
 
 					<div class="row content">
 						<div class="col-lg-6">
-							<p> We are a group of Kashmiri Pandit scientists and technologists sharing a common passion - to nurture and sustain
-							the passion for science for future generations
+							<p> We are a group of Kashmiri Pandit scientists and technologists sharing a common dream to
+							nurture and sustain the passion for science for future generations
 							</p> 
 							<ul> 
 								<li><i class="ri-check-double-line"></i> Connect with our history</li>
