@@ -32,9 +32,9 @@
                         // Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
                         function drawGeoChart() {
                         	// Get data
-				//var qString = encodeURIComponent('SELECT Country, count(Name) group by Country')
-				//var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
-				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1");
+				var qString = encodeURIComponent('SELECT City, count(Name) group by City')
+				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
+				//var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1");
 
 				query.send(handleQueryResponse)
 			}
@@ -386,7 +386,7 @@
 						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
 							<div class="member">
 								<div class="member-img">
-									<img src="static/images/dummy.png" class="img-fluid" alt="">
+									<img src="/static/images/dummy.png" class="img-fluid" alt="">
 									<div class="social">
 										<!--a href="https://twitter.com/SamvitKaul"><i class="bi-twitter"></i></a>
 										<a href="https://www.linkedin.com/in/samvitkaul/"><i class="bi-linkedin"></i></a-->
