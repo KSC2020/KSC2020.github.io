@@ -39,13 +39,15 @@
 				};
 				for (var key in qString){
 					var encString  = encodeURIComponent(qString[key]['query']);
-					var qBigString = dataSrc + '/gviz/tq?gid=1&headers=1&range=' + qString[key]['range'] + '&tq=' + encString;
+					var qBigString = dataSrc + '/gviz/tq?sheet=summary&headers=1&range=' + qString[key]['range'] + '&tq=' + encString;
+					/*
                                         console.log(key);
                                         console.log(qString[key]['query']);
                                         console.log(qString[key]['range']);
                                         console.log(qString[key]['response']);
                                         console.log(encString);
                                         console.log(qBigString);
+					*/
 					var query = new google.visualization.Query(qBigString); 
                                         query.send(qString[key]['response']);
 				}
