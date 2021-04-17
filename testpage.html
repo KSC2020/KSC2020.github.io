@@ -33,7 +33,7 @@
                         function drawGeoChart() {
                         	// Get data
 				//Name = C, City = G
-				var qString = encodeURIComponent('SELECT G, count(C) group by C');
+				var qString = encodeURIComponent('SELECT G, count(C) group by G');
 				console.log('qString',qString); 
 				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
 				//var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1");
