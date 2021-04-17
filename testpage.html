@@ -34,7 +34,7 @@
                         	// Get data
 				//Name = C, City = G
 				//var qString = 'SELECT G,H,I,COUNT(C) AS Members GROUP BY G,H,I ORDER BY Members DESC';
-				  var qString = "SELECT G,H,I,COUNT(C) GROUP BY G,H,I ORDER BY COUNT(C) DESC LABEL COUNT(C) 'Members'";
+				  var qString = "SELECT G,H,I,COUNT(C) GROUP BY G,H,I ORDER BY COUNT(C) DESC, G DESC, H DESC, I DESC LABEL COUNT(C) 'Members'";
 				var qEncString = encodeURIComponent(qString);
 				console.log('qString',qString); 
 				var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qEncString);
