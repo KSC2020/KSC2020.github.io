@@ -21,44 +21,6 @@
 		<link href="static/css/style.css" rel="stylesheet">
 
 		<!-- Google Charts -->
-		<!--script type="text/javascript">
-			var clientID = '138372310610-70u7gmjh5gjn4md61mgpmttlni36emge.apps.googleusercontent.com';
-			var scopes   = 'https://www.googleapis.com/auth/spreadsheets';
-                        function initGoogleAuth(){
-				gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: true}, handleAuthResult);
-			}
-                        function handleAuthResult(authResult){
-				var authorizeButton = document.getElementById('authorize-button');
-				if(authResult && !authResult.error){
-					authorizeButton.style.visibility = 'hidden';
-					makeApiCall();
-				}else{
-					authorizeButton.style.visibility = '';
-					authorizeButton.onClick = handleAuthClick;
-				}
-			}
-                        function handleAuthClick(e){
-				gapi.auth.authorize({client_id: clientID, scope: scopes, immediate: false}, handleAuthResult);
-				console.log("Auth Failed");
-				return false;
-			}
-                        function makeApiCall(){
-				// Note: The below spreadsheet is "Public on the web" and will work
-				// with or without an OAuth token.  For a better test, replace this
-				// URL with a private spreadsheet.
-				var tqUrl = 'https://docs.google.com/spreadsheets' +
-					    '/d/1XWJLkAwch5GXAt_7zOFDcg8Wm8Xv29_8PWuuW15qmAE/gviz/tq' +
-					    '?tqx=responseHandler:handleTqResponse' +
-					    '&access_token=' + encodeURIComponent(gapi.auth.getToken().access_token);
-				document.write("<script src=\"" + tqUrl +"\" type=\"text/javascript\"><\/script>");
-			}
-			function handleTqResponse(resp) {
-				console.log(JSON.stringify(resp));
-			        document.write(JSON.stringify(resp));
-			}
-		</script>
-		<script src="https://apis.google.com/js/auth.js?onload=initGoogleAuth"></script-->
-
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
 			// Load the Visualization API and the corechart package.
@@ -69,7 +31,6 @@
 
                         // Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
                         function drawGeoChart() {
-/*
                         	// Get data
 				//var qString = encodeURIComponent('SELECT Country, count(Name) group by Country')
 				//var query = new google.visualization.Query("https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c/gviz/tq?gid=0&headers=1&tq=" + qString);
@@ -78,29 +39,6 @@
 				query.send(handleQueryResponse)
 			}
                         function handleQueryResponse(response){
-                        	// Create the data table.
-				*/
-                        	var data = new google.visualization.DataTable();
-                        	data.addColumn('string', 'City');
-                        	data.addColumn('number', 'Members');
-                        	data.addColumn('number', 'Researchers');
-                        	data.addRows([
-					/*
-					['India',          500, 121],
-					['United Kingdom', 32,  30],
-					['Australia',      105, 87],
-					['New Zealand',    76,  56],
-					['Belgium',        100, 44],
-					['United States',  250, 173],
-					*/
-					['San Francisco', 500, 121],
-					['London',        32,  30],
-					['Delhi',         105, 87],
-					['Bangalore',     76,  56],
-					['Jammu',         100, 44],
-					['Mumbai',        250, 173],
-                        	]);
-				/*
 	                        if(response.isError()){
 					alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
 					console.log("Error in Google Vis Query Response")
@@ -108,17 +46,13 @@
 				}
                                 var data = response.getDataTable();
 				console.log("RESP:",data)
-				*/
                         
                         	// Instantiate and draw our chart, passing in some options.
-                        	var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
-                                var options = {
-					displayMode: 'markers',
-					colorAxis: { colors: ['green', 'blue']}
-				}
+                        	//var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+                                //var options = {}
 
-                        	//var chart = new google.visualization.Table(document.getElementById('chart_div'));
-				//var options = { showRowNumber: true, width: '100%', height: '100%' };
+                        	var chart = new google.visualization.Table(document.getElementById('chart_div'));
+				var options = { showRowNumber: true, width: '100%', height: '100%' };
                         	chart.draw(data, options);
                         }
              </script> <!-- End Google Charts -->
@@ -145,7 +79,7 @@
 						<li class="active"><a href="index.html">Home</a></li>
 						<li><a href="#about">About</a></li>
 						<li><a href="#team">Team</a></li>
-						<li><a href="#faq">Faq</a></li>
+						<li><a href="#faqg">Faq</a></li>
 						<li><a href="#connect">Connect</a></li>
 					</ul>
 				</nav><!-- .nav-menu -->
@@ -500,7 +434,7 @@
 			</section><!-- End Team Section -->
 
 			<!-- ======= Frequently Asked Questions Section ======= -->
-			<section id="faq" class="faq section-bg">
+			<section id="faqg" class="faq section-bg">
 				<div class="container">
 					<div class="section-title">
 						<h2>Frequently Asked Questions</h2>
