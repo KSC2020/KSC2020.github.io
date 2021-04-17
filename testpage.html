@@ -33,8 +33,8 @@
                         function drawGeoChart() {
 				var dataSrc = "https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c";
 				var qString = {
-					city:    { query: "SELECT A, B ORDER BY B DESC", range: "A1:B22", response: cityQResponse },
-					state:   { query: "SELECT D, E ORDER BY E DESC", range: "D1:E15", response: stateQResponse},
+					//city:    { query: "SELECT A, B ORDER BY B DESC", range: "A1:B22", response: cityQResponse },
+					//state:   { query: "SELECT D, E ORDER BY E DESC", range: "D1:E15", response: stateQResponse},
 					country: { query: "SELECT G, H ORDER BY H DESC", range: "G1:H42", response: countryQResponse}
 				};
 				for (var key in qString){
@@ -116,13 +116,13 @@
 				}else{
 					var data = response.getDataTable();
 
-					var chart1 = new google.visualization.Table(document.getElementById('country_chart_div1'));
-					var options1 = { showRowNumber: true, width: '100%', height: '100%' };
+					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
+					var options1 = { title: 'City wise Membership', width: '100%'};
 					chart1.draw(data, options1);
 
 					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
 					var options2 = {};
-					chart1.draw(data, options2);
+					chart2.draw(data, options2);
 				}
 
                         }
@@ -633,7 +633,7 @@
 					<!-- You can delete the links only if you purchased the pro version. -->
 					<!-- Licensing information: https://bootstrapmade.com/license/ -->
 					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/valera-free-bootstrap-theme/ -->
-					<!--Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a-->
+					<p> Logo Design &amp; Concept by Prashasti Tiku <p>],
 				</div>
 			</div>
 		</footer><!-- End Footer -->
