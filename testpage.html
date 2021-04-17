@@ -33,9 +33,9 @@
                         function drawGeoChart() {
 				var dataSrc = "https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c";
 				var qString = {
-					city:    { query: "SELECT A,B ORDER BY B DESC LABEL B 'Members'", range: "A1:B22", response: cityQResponse },
-					state:   { query: "SELECT A,B ORDER BY B DESC LABEL B 'Members'", range: "D1:E15", response: stateQResponse},
-					country: { query: "SELECT A,B ORDER BY B DESC LABEL B 'Members'", range: "G1:H42", response: countryQResponse}
+					city:    { query: "SELECT City,    Members ORDER BY Members DESC", range: "A1:B22", response: cityQResponse },
+					state:   { query: "SELECT State,   Members ORDER BY Members DESC", range: "D1:E15", response: stateQResponse},
+					country: { query: "SELECT Country, Members ORDER BY Members DESC", range: "G1:H42", response: countryQResponse}
 				};
 				for (var key in qString){
 					var encString  = encodeURIComponent(qString[key]['query']);
