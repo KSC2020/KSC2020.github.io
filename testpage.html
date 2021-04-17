@@ -107,17 +107,19 @@
 					data.addColumn('string', 'Country');
 					data.addColumn('number', 'Members');
 					data.addRows([ ["India", 30], ["United States", 4], ["Japan", 1] ]);
+
 					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
-					var options1 = { title: 'Country wise Membership', width: '100%', height: '100%' };
+					var options1 = { width: '100%'};
 					chart1.draw(data, options1);
-					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
+
+					var chart2   = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
 					var options2 = {};
-					chart1.draw(data, options2);
+					chart2.draw(data, options2);
 				}else{
 					var data = response.getDataTable();
 
 					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
-					var options1 = { title: 'City wise Membership', width: '100%'};
+					var options1 = { width: '100%'};
 					chart1.draw(data, options1);
 
 					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
@@ -175,9 +177,12 @@
 
 					<div class="row content">
 						<div class="col-lg-6">
-							<p> We are a group of Kashmiri Pandit scientists and technologists sharing a common dream - <b><i>to
-							nurture, motivate and sustain the passion for science &amp; curiosity among the young &amp; budding
-							scientists within our community</i></b>.</p>
+							<p> We are a group of Kashmiri Pandit scientists &amp; technologists with a common dream </p>
+
+							<p><center> <b><i>
+							To nurture, motivate &amp; sustain the passion for science &amp; curiosity among the young &amp; budding
+							scientists within our community </i></b> </center> </p>
+
 							<p>We want to encourage students and researchers to pursue excellence with global standards, through guidance
 							on best practices for independent and collaborative research.</p>
 							<p>Over time, we hope to establish a free,
@@ -577,16 +582,13 @@
 						</p> </div>
 
 					<div class="row">
-					<table class="columns">
-						<tr>
-							<td><div id="city_chart_div" style="border: 1px solid #ccc"></div></td>
-							<td><div id="state_chart_div" style="border: 1px solid #ccc"></div></td>
-						</tr>
-						<tr>
-							<td><div id="country_chart_div1" style="border: 1px solid #ccc"></div></td>
-							<td><div id="country_chart_div2" style="border: 1px solid #ccc"></div></td>
-						</tr>
-					</table>
+						<center><h3> Country Wise Membership </h3></center> 
+						<table class="columns">
+							<!--tr> <td><div id="city_chart_div" style="border: 1px solid #ccc"></div></td> </tr>
+							<tr> <td><div id="state_chart_div" style="border: 1px solid #ccc"></div></td></tr-->
+							<tr> <td><div id="country_chart_div1" style="border: 1px solid #ccc"></div></td> </tr>
+							<tr> <td><div id="country_chart_div2" style="border: 1px solid #ccc"></div></td> </tr>
+						</table>
 					</div>
 					<div class="row">
 						<center> <h3> Please Register </h3> </center>
