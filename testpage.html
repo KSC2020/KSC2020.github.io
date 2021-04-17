@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 		<script type="text/javascript">
 			// Load the Visualization API and the corechart package.
-			google.charts.load('current', {'packages':['table','geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'});
+			google.charts.load('current', {'packages':['corechart','table','geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'});
 
                         // Set a callback to run when the Google Visualization API is loaded.
                         google.charts.setOnLoadCallback(drawGeoChart);
@@ -55,43 +55,75 @@
 
                         function cityQResponse(response){
 	                        if(response.isError()){
-					alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response");
-					return;
+					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+					console.log("Error in Google Vis Query Response- Using dummy data!!");
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'City');
+					data.addColumn('number', 'Members');
+					data.addRows([ 
+						["Bangalore",1], ["Bhatinda",1], ["Bikaner",1], ["Broken Arrow",1], ["Chandigarh", 1], ["Delhi", 7],
+						["Durham", 1], ["Faridabad", 2], ["Ghazibad", 2], ["Greater Noida", 2], ["Gurugram", 3], ["Jammu", 3],
+						["Kanpur", 1], ["Karnal", 1], ["New Orleans", 1], ["Noida", 1], ["Pune", 1], ["Seattle", 1],
+						["Shillong", 2], ["Tsuchiura-Shi", 1], ["Udhampur", 1]
+					]);
+					var chart = new google.visualization.PieChart(document.getElementById('city_chart_div'));
+					var options = { title: 'City wise Membership', width: '100%', height: '100%' };
+					chart.draw(data, options);
+				}else{
+					var data = response.getDataTable();
+					var chart = new google.visualization.Table(document.getElementById('city_chart_div'));
+					var options = { showRowNumber: true, width: '100%', height: '100%' };
+					chart.draw(data, options);
 				}
-                                var data = response.getDataTable();
-                        	var chart = new google.visualization.Table(document.getElementById('city_chart_div'));
-				var options = { showRowNumber: true, width: '100%', height: '100%' };
-                        	chart.draw(data, options);
                         }
 
                         function stateQResponse(response){
 	                        if(response.isError()){
-					alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response");
-					return;
+					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+					console.log("Error in Google Vis Query Response- Using dummy data!!");
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'State');
+					data.addColumn('number', 'Members');
+					data.addRows([ ["Delhi",7], ["Haryana",6], ["Ibaraki",1], ["Jammu & Kashmir",4], ["Karnataka",1], ["Louisiana",1],
+						["Maharashtra",1], ["Meghalaya",2], ["North Carolina",1], ["Oklahoma",1], ["Punjab",2],
+						["Rajasthan",1], ["Uttar Pradesh",6], ["Washington",1]
+					]);
+					var chart = new google.visualization.BarChart(document.getElementById('state_chart_div'));
+					var options = { title: 'State wise Membership', width: '100%', height: '100%' };
+					chart.draw(data, options);
+				}else{
+					var data = response.getDataTable();
+					var chart = new google.visualization.Table(document.getElementById('state_chart_div'));
+					var options = { showRowNumber: true, width: '100%', height: '100%' };
+					chart.draw(data, options);
 				}
-                                var data = response.getDataTable();
-                        	var chart = new google.visualization.Table(document.getElementById('state_chart_div'));
-				var options = { showRowNumber: true, width: '100%', height: '100%' };
-                        	chart.draw(data, options);
                         }
 
                         function countryQResponse(response){
 	                        if(response.isError()){
-					alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response");
-					return;
+					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+					console.log("Error in Google Vis Query Response- Using dummy data!!");
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Country');
+					data.addColumn('number', 'Members');
+					data.addRows([ ["India", 30], ["United States", 4], ["Japan", 1] ]);
+					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
+					var options1 = { title: 'Country wise Membership', width: '100%', height: '100%' };
+					chart1.draw(data, options1);
+					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
+					var options2 = {};
+					chart1.draw(data, options2);
+				}else{
+					var data = response.getDataTable();
+
+					var chart1 = new google.visualization.Table(document.getElementById('country_chart_div1'));
+					var options1 = { showRowNumber: true, width: '100%', height: '100%' };
+					chart1.draw(data, options1);
+
+					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
+					var options2 = {};
+					chart1.draw(data, options2);
 				}
-                                var data = response.getDataTable();
-
-                        	var chart1 = new google.visualization.Table(document.getElementById('country_chart_div1'));
-				var options1 = { showRowNumber: true, width: '100%', height: '100%' };
-                        	chart1.draw(data, options1);
-
-                        	var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
-                                var options2 = {};
-                        	chart1.draw(data, options2);
 
                         }
              </script> <!-- End Google Charts -->
@@ -117,8 +149,9 @@
 					<ul>
 						<li class="active"><a href="index.html">Home</a></li>
 						<li><a href="#about">About</a></li>
+						<li><a href="#preview">Preview</a></li>
 						<li><a href="#team">Team</a></li>
-						<li><a href="#faqg">Faq</a></li>
+						<!--li><a href="#faqg">Faq</a></li-->
 						<li><a href="#connect">Connect</a></li>
 					</ul>
 				</nav><!-- .nav-menu -->
@@ -143,7 +176,7 @@
 					<div class="row content">
 						<div class="col-lg-6">
 							<p> We are a group of Kashmiri Pandit scientists and technologists sharing a common dream - <b><i>to
-							nurture, motivate and sustain the passion for science &amp; research among the young &amp; budding
+							nurture, motivate and sustain the passion for science &amp; curiosity among the young &amp; budding
 							scientists within our community</i></b>.</p>
 							<p>We want to encourage students and researchers to pursue excellence with global standards, through guidance
 							on best practices for independent and collaborative research.</p>
@@ -159,25 +192,29 @@
 							societies. We hope that our endeavour will reach out to the creative potential in our community at large, 
 							and result in first rate contributions at a global scale.
 							</p>
+							<p> <center> <img src="static/images/sapling.png" class="figure-img img-fluid rounded"> </center> </p>
 						</div>
 						<div class="col-lg-6 pt-4 pt-lg-0">
-							<p> We have planned following activities as a start </p>
+							<p> <center><i><b>  We have defined following objectives for year 2021 </b></i> </center> </p>
 							<ul> 
-								<li><i class="ri-check-double-line"></i> Curate a Database of Kashmiri Pandit Researchers</li>
-								<li><i class="ri-check-double-line"></i> Distinguished Lecture Series
+								<li><i class="bi-file-earmark-check"></i> Curate a Database of Kashmiri Pandit Scientists, Researchers, Academics and Enthusiasts</li>
+								<li><i class="bi-file-earmark-check"></i> Hold Quarterly Distinguished Lecture Series from Eminent Role Models and Eminent Scientists
 									<ul>
-										<li>Navreh Series</li>
-										<li>Diwali Series</li>
+										<li><i class="bi-hourglass-top">   </i> Navreh Series</li>
+										<li><i class="bi-hourglass-split"> </i> Guru Purnima Series</li>
+										<li><i class="bi-hourglass-split"> </i> Diwali Series</li>
+										<li><i class="bi-hourglass-bottom"></i> Makar Sankranti Series</li>
 									</ul>
 								</li>
-								<li><i class="ri-check-double-line"></i> Popular Lecture Series
+								<li><i class="bi-file-earmark-check"></i> Outreach/Ignite Programmes in Biological, Chemical, Physical, &amp; Computational Sciences
 									<ul>
-										<li>Guru Purnima Series</li>
-										<li>Makara/Shishir Sankranti Series</li>
+										<li><i class="bi-lightbulb-fill"></i>Hold Popular Lecture Series from Current Young Scientists &amp; Researchers</li>
+										<li><i class="bi-lightning-charge-fill"></i>Conduct Talent Hunt Among Students At Different Levels </li>
 									</ul>
 								</li>
-								<li><i class="ri-check-double-line"></i> Annual Prizes For Outstanding Research </li>
+								<li><i class="bi-file-earmark-check"></i> Annual Prizes For Outstanding Research </li>
 							</ul>
+							<p> <center> <img src="static/images/tree_cartoon.png" class="figure-img img-fluid rounded"> </center> </p>
 							<!--a href="#" class="btn-learn-more">Learn More 2021 Programs</a-->
 						</div>
 					</div>
@@ -295,40 +332,38 @@
 				</div>
 			</section--><!-- End Testimonials Section -->
 
-			<section>
+			<section id="preview" class="preview section-bg">
 			       	<div class="container">
 					<div class="section-title">
-						<h2>Lecture Previews</h2>
-						<p> hkjjhjad hkjhadS H JHSAD JKHAS HKJSAHFKDJEWJH JHFWJHWF KJHWF </p>
-					</div>
+						<h2>Preview</h2>
+						<p> Teasers for our Distinguished Lecture Navreh Series 2021 </p> </div>
 
 					<div class="row">
-						<div class="col">
-							<center>
-								<div class="embed-responsive embed-responsive-1by1">
-									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SoxVicR9ZGc?rel=0" allowfullscreen></iframe> 
+						<div class="col-6 d-flex align-items-stretch">
+							<div class="card">
+								<div class="embed-responsive embed-responsive-4by3 text-center">
+									<iframe class="embed-responsive-item youtube" src="https://www.youtube.com/embed/SoxVicR9ZGc?rel=0" allowfullscreen></iframe> 
 								</div>
-								<h3>Subash Kak</h3>
-							</center>
+							</div>
 						</div>
-						<div class="col">
-								<div class="embed-responsive embed-responsive-1by1">
-									<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/SoxVicR9ZGc?rel=0" allowfullscreen></iframe> 
+						<div class="col-6 d-flex align-items-stretch">
+							<div class="card">
+								<div class="embed-responsive embed-responsive-4by3 text-center">
+									<iframe class="embed-responsive-item youtube" src="https://www.youtube.com/embed/o7kI-wFx4m4?rel=0" allowfullscreen></iframe> 
 								</div>
-								<h3>Bamzai</h3>
+							</div>
 						</div>
 					</div>
 				</div>
-			</section--><!-- End Video Intros Section -->
+			</section--><!-- End Preview Section -->
 
 			<!-- ======= Team Section ======= -->
 			<section id="team" class="team section-bg">
 				<div class="container">
 					<div class="section-title">
 						<h2>Team</h2>
-						<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem.
-						Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
-						Quia fugiat sit in iste officiis commodi quidem hic quas.</p></div>
+						<p>This is the core team who brainstormed and created the initial template. We would like to acknowledge many other people who have contributed in the process.
+						</p></div>
 					<!-- Begin row 1-->
 					<div class="row">
 						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
@@ -473,7 +508,7 @@
 			</section><!-- End Team Section -->
 
 			<!-- ======= Frequently Asked Questions Section ======= -->
-			<section id="faqg" class="faq section-bg">
+			<!--section id="faqg" class="faq section-bg">
 				<div class="container">
 					<div class="section-title">
 						<h2>Frequently Asked Questions</h2>
@@ -532,22 +567,32 @@
 						</ul>
 					</div>
 				</div>
-			</section><!-- End Frequently Asked Questions Section -->
+			</section--><!-- End Frequently Asked Questions Section -->
 
 			<section id="connect" class="contact">
 				<div class="container">
 					<div class="section-title">
 						<h2>Connect</h2>
-						<p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit.
-						Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem
-						hic quas.</p> </div>
+						<p> This is based on the initial list of scientists and researchers we have connected to. Over time, we would like to expand our footprint globally.
+						</p> </div>
 
-					<a href="https://docs.google.com/forms/d/e/1FAIpQLSdMOqXx5MDN2BIaTsIuJ86zw0CDldTSyjeLYoiyh0dKKkeNVw/viewform?vc=0&c=0&w=1&flr=0&usp=mail_form_link">Register</a>
-
-					<div class="container"> <center> <div id="city_chart_div"></div> </center> </div>
-					<div class="container"> <center> <div id="state_chart_div"></div> </center> </div>
-					<div class="container"> <center> <div id="country_chart_div1"></div> </center> </div>
-					<div class="container"> <center> <div id="country_chart_div2"></div> </center> </div>
+					<div class="row">
+					<table class="columns">
+						<tr>
+							<td><div id="city_chart_div" style="border: 1px solid #ccc"></div></td>
+							<td><div id="state_chart_div" style="border: 1px solid #ccc"></div></td>
+						</tr>
+						<tr>
+							<td><div id="country_chart_div1" style="border: 1px solid #ccc"></div></td>
+							<td><div id="country_chart_div2" style="border: 1px solid #ccc"></div></td>
+						</tr>
+					</table>
+					</div>
+					<div class="row">
+						<center> <h3> Please Register </h3> </center>
+						<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSez5pCSyZ2YIXAEp-1XwfsjWlNi_rJawL58wbrDiUBeUv5PIw/viewform?embedded=true"
+							width="100%" height="1200" frameborder="0" marginheight="0" marginwidth="0"> Loading… </iframe>
+					</div>
 				</div>
 			</section>
 
