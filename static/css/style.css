@@ -606,15 +606,12 @@ section {
   background-position: center center;
 }
 
+@media (min-width: 1200px) {
 .youtube{
-	/*
-	max-width: 800px;
-	max-height: 600px;
-	height: 100%;
-	*/
 	width: 600px;
 	height: 450px;
        	position: relative !important;
+}
 }
 
 

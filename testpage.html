@@ -19,116 +19,6 @@
 
 		<!-- Template Main CSS File -->
 		<link href="static/css/style.css" rel="stylesheet">
-
-		<!-- Google Charts -->
-		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-		<script type="text/javascript">
-			// Load the Visualization API and the corechart package.
-			google.charts.load('current', {'packages':['corechart','table','geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'});
-
-                        // Set a callback to run when the Google Visualization API is loaded.
-                        google.charts.setOnLoadCallback(drawGeoChart);
-
-                        // Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
-                        function drawGeoChart() {
-				var dataSrc = "https://docs.google.com/spreadsheets/d/1RaC1wTmP1g9wNN6KJ-1nvXY3o_LTJKa5mVb8T3Jxb6c";
-				var qString = {
-					//city:    { query: "SELECT A, B ORDER BY B DESC", range: "A1:B22", response: cityQResponse },
-					//state:   { query: "SELECT D, E ORDER BY E DESC", range: "D1:E15", response: stateQResponse},
-					country: { query: "SELECT G, H ORDER BY H DESC", range: "G1:H42", response: countryQResponse}
-				};
-				for (var key in qString){
-					var encString  = encodeURIComponent(qString[key]['query']);
-					var qBigString = dataSrc + '/gviz/tq?sheet=summary&headers=1&range=' + qString[key]['range'] + '&tq=' + encString;
-					/*
-                                        console.log(key);
-                                        console.log(qString[key]['query']);
-                                        console.log(qString[key]['range']);
-                                        console.log(qString[key]['response']);
-                                        console.log(encString);
-                                        console.log(qBigString);
-					*/
-					var query = new google.visualization.Query(qBigString); 
-                                        query.send(qString[key]['response']);
-				}
-			}
-
-                        function cityQResponse(response){
-	                        if(response.isError()){
-					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response- Using dummy data!!");
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'City');
-					data.addColumn('number', 'Members');
-					data.addRows([ 
-						["Bangalore",1], ["Bhatinda",1], ["Bikaner",1], ["Broken Arrow",1], ["Chandigarh", 1], ["Delhi", 7],
-						["Durham", 1], ["Faridabad", 2], ["Ghazibad", 2], ["Greater Noida", 2], ["Gurugram", 3], ["Jammu", 3],
-						["Kanpur", 1], ["Karnal", 1], ["New Orleans", 1], ["Noida", 1], ["Pune", 1], ["Seattle", 1],
-						["Shillong", 2], ["Tsuchiura-Shi", 1], ["Udhampur", 1]
-					]);
-					var chart = new google.visualization.PieChart(document.getElementById('city_chart_div'));
-					var options = { title: 'City wise Membership', width: '100%', height: '100%' };
-					chart.draw(data, options);
-				}else{
-					var data = response.getDataTable();
-					var chart = new google.visualization.Table(document.getElementById('city_chart_div'));
-					var options = { showRowNumber: true, width: '100%', height: '100%' };
-					chart.draw(data, options);
-				}
-                        }
-
-                        function stateQResponse(response){
-	                        if(response.isError()){
-					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response- Using dummy data!!");
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'State');
-					data.addColumn('number', 'Members');
-					data.addRows([ ["Delhi",7], ["Haryana",6], ["Ibaraki",1], ["Jammu & Kashmir",4], ["Karnataka",1], ["Louisiana",1],
-						["Maharashtra",1], ["Meghalaya",2], ["North Carolina",1], ["Oklahoma",1], ["Punjab",2],
-						["Rajasthan",1], ["Uttar Pradesh",6], ["Washington",1]
-					]);
-					var chart = new google.visualization.BarChart(document.getElementById('state_chart_div'));
-					var options = { title: 'State wise Membership', width: '100%', height: '100%' };
-					chart.draw(data, options);
-				}else{
-					var data = response.getDataTable();
-					var chart = new google.visualization.Table(document.getElementById('state_chart_div'));
-					var options = { showRowNumber: true, width: '100%', height: '100%' };
-					chart.draw(data, options);
-				}
-                        }
-
-                        function countryQResponse(response){
-	                        if(response.isError()){
-					//alert('Error In Query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-					console.log("Error in Google Vis Query Response- Using dummy data!!");
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Country');
-					data.addColumn('number', 'Members');
-					data.addRows([ ["India", 30], ["United States", 4], ["Japan", 1] ]);
-
-					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
-					var options1 = { width: '100%'};
-					chart1.draw(data, options1);
-
-					var chart2   = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
-					var options2 = {};
-					chart2.draw(data, options2);
-				}else{
-					var data = response.getDataTable();
-
-					var chart1 = new google.visualization.PieChart(document.getElementById('country_chart_div1'));
-					var options1 = { width: '100%'};
-					chart1.draw(data, options1);
-
-					var chart2 = new google.visualization.GeoChart(document.getElementById('country_chart_div2'));
-					var options2 = {};
-					chart2.draw(data, options2);
-				}
-
-                        }
-             </script> <!-- End Google Charts -->
 	</head>
 
 	<body>
@@ -177,7 +67,7 @@
 
 					<div class="row content">
 						<div class="col-lg-6">
-							<p> We are a group of Kashmiri Pandit scientists &amp; technologists with a common dream </p>
+							<p> We are a group of Kashmiri Pandit scientists &amp; technologists with a common ambition </p>
 
 							<p><center> <b><i>
 							To nurture, motivate &amp; sustain the passion for science &amp; curiosity among the young &amp; budding
@@ -185,35 +75,35 @@
 
 							<p>We want to encourage students and researchers to pursue excellence with global standards, through guidance
 							on best practices for independent and collaborative research.</p>
-							<p>Over time, we hope to establish a free,
-							equitable platform for interested people within the community to network, engage, encourage, mentor
-							&amp; collaborate with each other in a life-long learning model.</p>
-							<p>In the process, we would also like to 
-							connect our young scientists to our traditional knowledge systems and the values of enquiry - sustained
-							through the vicissitudes of time.</p> 
-							<p>
-							Modern scientific and technological pursuits are  increasingly complex and interdisciplinary in their texture.
+
+							<p>Over time, we hope to establish a free, equitable platform for enthusiasts within the community to network,
+							engage, encourage, mentor &amp; collaborate with each other in a life-long learning model.</p>
+
+							<p>In the process, we would also like to connect our young scientists to our traditional knowledge systems and
+							the values of enquiry - sustained through the vicissitudes of time.</p> 
+
+							<p> Modern scientific and technological pursuits are  increasingly complex and interdisciplinary in their texture.
 							Cross-disciplinary collaborations will be of primal importance for making progress on the big problems of future
 							societies. We hope that our endeavour will reach out to the creative potential in our community at large, 
 							and result in first rate contributions at a global scale.
 							</p>
+
 							<p> <center> <img src="static/images/sapling.png" class="figure-img img-fluid rounded"> </center> </p>
 						</div>
 						<div class="col-lg-6 pt-4 pt-lg-0">
 							<p> <center><i><b>  We have defined following objectives for year 2021 </b></i> </center> </p>
 							<ul> 
 								<li><i class="bi-file-earmark-check"></i> Curate a Database of Kashmiri Pandit Scientists, Researchers, Academics and Enthusiasts</li>
-								<li><i class="bi-file-earmark-check"></i> Hold Quarterly Distinguished Lecture Series from Eminent Role Models and Eminent Scientists
+								<li><i class="bi-file-earmark-check"></i> Hold Distinguished Lecture Series by Eminent Role Models and Scientists
 									<ul>
 										<li><i class="bi-hourglass-top">   </i> Navreh Series</li>
 										<li><i class="bi-hourglass-split"> </i> Guru Purnima Series</li>
-										<li><i class="bi-hourglass-split"> </i> Diwali Series</li>
 										<li><i class="bi-hourglass-bottom"></i> Makar Sankranti Series</li>
 									</ul>
 								</li>
 								<li><i class="bi-file-earmark-check"></i> Outreach/Ignite Programmes in Biological, Chemical, Physical, &amp; Computational Sciences
 									<ul>
-										<li><i class="bi-lightbulb-fill"></i>Hold Popular Lecture Series from Current Young Scientists &amp; Researchers</li>
+										<li><i class="bi-lightbulb-fill"></i>Hold Popular Lecture Series by Young Scientists &amp; Researchers</li>
 										<li><i class="bi-lightning-charge-fill"></i>Conduct Talent Hunt Among Students At Different Levels </li>
 									</ul>
 								</li>
@@ -231,7 +121,7 @@
 				<div class="container">
 					<div class="row counters">
 						<div class="col-lg-3 col-6 text-center"> <span data-toggle="counter-up">57  </span> <p>Members                </p> </div>
-						<div class="col-lg-3 col-6 text-center"> <span data-toggle="counter-up">4   </span> <p>Distinguished Lectures </p> </div>
+						<div class="col-lg-3 col-6 text-center"> <span data-toggle="counter-up">3   </span> <p>Distinguished Lectures </p> </div>
 						<div class="col-lg-3 col-6 text-center"> <span data-toggle="counter-up">11  </span> <p>Popular Lectures       </p> </div>
 						<div class="col-lg-3 col-6 text-center"> <span data-toggle="counter-up">151 </span> <p>Students               </p> </div>
 					</div>
@@ -371,7 +261,87 @@
 						</p></div>
 					<!-- Begin row 1-->
 					<div class="row">
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
+							<div class="member">
+								<div class="member-img">
+									<img src="static/images/SheetalKaul-4x3.jpg" class="img-fluid" alt="">
+									<div class="social">
+										<a href="mailto://sheetal.kaulin@gmail.com"><i class="bi-envelope-fill"></i></a>
+									</div>
+								</div>
+								<div class="member-info">
+									<h4>Sheetal Kaul</h4>
+									<span>Phd Scholar<br>ICGEB New Delhi </span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
+							<div class="member">
+								<div class="member-img">
+									<img src="static/images/MonicaKoul-4x3.jpg" class="img-fluid" alt="">
+									<div class="social">
+										<a href="mailto://drmkoul@gmail.com"><i class="bi-envelope-fill"></i></a>
+									</div>
+								</div>
+								<div class="member-info">
+									<h4>Monica Koul</h4>
+									<span>Associate Professor<br>
+										University Of Delhi</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
+							<div class="member">
+								<div class="member-img">
+									<img src="static/images/AnupamRaina-4x3.jpg" class="img-fluid" alt="">
+									<div class="social">
+										<a href="https://www.linkedin.com/in/anupam-raina-b8090517/"><i class="bi-linkedin"></i></a>
+										<a href="mailto://anupamraina@gmail.com"><i class="bi-envelope-fill"></i></a>
+									</div>
+								</div>
+								<div class="member-info">
+									<h4>Anupam Raina</h4>
+									<span>Senior Manager<br>APTARA</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
+							<div class="member">
+								<div class="member-img">
+									<img src="static/images/AnilKoul-4x3.jpg" class="img-fluid" alt="">
+									<div class="social">
+										<a href="https://twitter.com/anil_koul1"><i class="bi-twitter"></i></a>
+										<a href="https://www.linkedin.com/in/anil-koul-8996691/"><i class="bi-linkedin"></i></a>
+										<a href="mailto://AnilKoul30@yahoo.com"><i class="bi-envelope-fill"></i></a>
+									</div>
+								</div>
+								<div class="member-info">
+									<h4>Anil Koul</h4>
+									<span>Vice President <br>
+									       	Johnson &amp; Johnson, Belgium</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
+							<div class="member">
+								<div class="member-img">
+									<img src="static/images/SanjaySapru-4x3.jpg" class="img-fluid" alt="">
+									<div class="social">
+										<a href="https://twitter.com/SapruSanjay"><i class="bi-twitter"></i></a>
+										<a href="https://www.linkedin.com/in/sapru/"><i class="bi-linkedin"></i></a>
+										<a href="mailto://sapru1971@gmail.com"><i class="bi-envelope-fill"></i></a>
+									</div>
+								</div>
+								<div class="member-info">
+									<h4>Sanjay Sapru</h4>
+									<span>Director <br> Oracle Communications</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
 							<div class="member">
 								<div class="member-img">
 									<img src="static/images/SamvitKaul-4x3.jpg" class="img-fluid" alt="">
@@ -384,115 +354,28 @@
 								<div class="member-info">
 									<h4>Samvit Kaul</h4>
 									<span>Principal Engineer<br>
-										GPU &amp; Deep Learning Architect<br>
-										Intel Corporation</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-							<div class="member">
-								<div class="member-img">
-									<img src="static/images/AnilKoul-4x3.jpg" class="img-fluid" alt="">
-									<div class="social">
-										<a href="https://twitter.com/anil_koul1"><i class="bi-twitter"></i></a>
-										<a href="https://www.linkedin.com/in/anil-koul-8996691/"><i class="bi-linkedin"></i></a>
-										<a href="mailto://AnilKoul30@yahoo.com"><i class="bi-envelope-fill"></i></a>
-									</div>
-								</div>
-								<div class="member-info">
-									<h4>Anil Koul</h4>
-									<span>Vice President &amp; Head <br>
-										Global Public Health &amp;<br>
-										Infectious Discovery Research <br>
-									       	Jhonson &amp; Jhonson</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-							<div class="member">
-								<div class="member-img">
-									<img src="static/images/SanjaySapru-4x3.jpg" class="img-fluid" alt="">
-									<div class="social">
-										<a href="https://twitter.com/SapruSanjay"><i class="bi-twitter"></i></a>
-										<a href="https://www.linkedin.com/in/sapru/"><i class="bi-linkedin"></i></a>
-										<a href="mailto://sapru1971@gmail.com"><i class="bi-envelope-fill"></i></a>
-									</div>
-								</div>
-								<div class="member-info">
-									<h4>Sanjay Sapru</h4>
-									<span>Director - Sales - Oracle Communications</span>
+										Intel, Santa Clara</span>
 								</div>
 							</div>
 						</div>
 				        </div>
 					<!-- End row 1-->
 					<div class="row">
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+						<div class="col-lg-2 col-md-6 d-flex align-items-stretch">
 							<div class="member">
 								<div class="member-img">
-									<img src="static/images/MonicaKoul-4x3.jpg" class="img-fluid" alt="">
+									<img src="static/images/SamanthaV2.jpg" class="img-fluid" alt="">
 									<div class="social">
-										<!--a href=""><i class="bi-twitter"></i></a>
-										<a href=""><i class="bi-linkedin"></i></a-->
-										<a href="mailto://drmkoul@gmail.com"><i class="bi-envelope-fill"></i></a>
-									</div>
-								</div>
-								<div class="member-info">
-									<h4>Monica Koul</h4>
-									<span>Associate Professor<br>
-										Department of Botany<br>
-										Hansraj College<br>
-										University Of Delhi</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-							<div class="member">
-								<div class="member-img">
-									<img src="static/images/SheetalKaul-4x3.jpg" class="img-fluid" alt="">
-									<div class="social">
-										<!--a href="https://twitter.com/SamvitKaul"><i class="bi-twitter"></i></a>
-										<a href="https://www.linkedin.com/in/samvitkaul/"><i class="bi-linkedin"></i></a-->
-										<a href="mailto://sheetal.kaulin@gmail.com"><i class="bi-envelope-fill"></i></a>
-									</div>
-								</div>
-								<div class="member-info">
-									<h4>Sheetal Kaul</h4>
-									<span>Phd Scholar<br>ICGEB New Delhi </span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-							<div class="member">
-								<div class="member-img">
-									<img src="/static/images/dummy.png" class="img-fluid" alt="">
-									<div class="social">
-										<!--a href="https://twitter.com/SamvitKaul"><i class="bi-twitter"></i></a>
-										<a href="https://www.linkedin.com/in/samvitkaul/"><i class="bi-linkedin"></i></a-->
 										<a href="mailto://samanthavaishnavi@gmail.com"><i class="bi-envelope-fill"></i></a>
 									</div>
 								</div>
 								<div class="member-info">
 									<h4>Samantha Vaishnavi</h4>
-									<span>Associate Professor<br>Central University of Jammu</span>
+									<span>Assistant Professor<br>Central University of Jammu</span>
 								</div>
 							</div>
 						</div>
-						<!--div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-							<div class="member">
-								<div class="member-img">
-									<img src="static/images/dummy.png" class="img-fluid" alt="">
-									<div class="social">
-										<a href="mailto://kaul60@rediffmail.com"><i class="bi-envelope-fill"></i></a>
-									</div>
-								</div>
-								<div class="member-info">
-									<h4>Kaul60</h4>
-									<span>XXX<br>XXX</span>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+						<!--div class="col-lg-3 col-md-6 d-flex align-items-stretch">
 							<div class="member">
 								<div class="member-img">
 									<img src="static/images/dummy.png" class="img-fluid" alt="">
@@ -580,16 +463,6 @@
 						<h2>Connect</h2>
 						<p> This is based on the initial list of scientists and researchers we have connected to. Over time, we would like to expand our footprint globally.
 						</p> </div>
-
-					<div class="row">
-						<center><h3> Country Wise Membership </h3></center> 
-						<table class="columns">
-							<!--tr> <td><div id="city_chart_div" style="border: 1px solid #ccc"></div></td> </tr>
-							<tr> <td><div id="state_chart_div" style="border: 1px solid #ccc"></div></td></tr-->
-							<tr> <td><div id="country_chart_div1" style="border: 1px solid #ccc"></div></td> </tr>
-							<tr> <td><div id="country_chart_div2" style="border: 1px solid #ccc"></div></td> </tr>
-						</table>
-					</div>
 					<div class="row">
 						<center> <h3> Please Register </h3> </center>
 						<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSez5pCSyZ2YIXAEp-1XwfsjWlNi_rJawL58wbrDiUBeUv5PIw/viewform?embedded=true"
@@ -635,7 +508,9 @@
 					<!-- You can delete the links only if you purchased the pro version. -->
 					<!-- Licensing information: https://bootstrapmade.com/license/ -->
 					<!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/valera-free-bootstrap-theme/ -->
-					<p> Logo Design &amp; Concept by Prashasti Tiku <p>],
+					<p> Logo Design &amp; Concept by Prashasti Tiku <a href="mailto://tikooprashasti@gmail.com"><i class="bi-envelope-fill"></i></a> <p>
+					<p> Flyer Design &amp; Concept by Vasundhra Teng <a href="mailto://vasundra.teng@gmail.com"><i class="bi-envelope-fill"></i></a> <p>
+
 				</div>
 			</div>
 		</footer><!-- End Footer -->
